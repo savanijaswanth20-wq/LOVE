@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Sowmya 🎂❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<style>
+body {
+    margin:0;
+    height:100vh;
+    font-family:'Poppins',sans-serif;
+    overflow:hidden;
+    background:url("C:\\Users\\savan\\OneDrive\\Pictures\\sowmya.jpeg") no-repeat center/cover;
+}
+
+/* overlay */
+.overlay {
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.6);
+}
+
+/* container */
+.container {
+    position:relative;
+    z-index:1;
+    text-align:center;
+    color:white;
+    top:50%;
+    transform:translateY(-50%);
+    padding:20px;
+}
+
+h1 {
+    font-family:'Pacifico';
+    font-size:45px;
+    animation:glow 2s infinite alternate;
+}
+
+@keyframes glow {
+    from {text-shadow:0 0 10px pink;}
+    to {text-shadow:0 0 40px red;}
+}
+
+#text {
+    font-size:20px;
+    margin:20px;
+    min-height:60px;
+}
+
+/* buttons */
+button {
+    padding:12px 20px;
+    border:none;
+    border-radius:30px;
+    background:pink;
+    margin:6px;
+    cursor:pointer;
+}
+button:hover {
+    background:red;
+    color:white;
+}
+
+/* gift */
+#gift {
+    font-size:80px;
+    cursor:pointer;
+    animation:bounce 1s infinite;
+}
+@keyframes bounce {
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-10px);}
+}
+
+/* hearts */
+.heart {
+    position:fixed;
+    font-size:20px;
+    animation:float 5s linear infinite;
+}
+@keyframes float {
+    from {transform:translateY(100vh);}
+    to {transform:translateY(-10vh);}
+}
+
+/* video */
+.video-box {
+    display:none;
+    position:fixed;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    background:black;
+    padding:10px;
+    z-index:2;
+}
+
+/* proposal */
+#proposal {
+    display:none;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="overlay"></div>
+
+<div class="container">
+
+<h1>🎂 Happy Birthday Sowmya ❤️</h1>
+
+<div id="gift" onclick="openGift()">🎁</div>
+
+<p id="text"></p>
+
+<div id="controls" style="display:none;">
+<button onclick="playMusic()">🎵 Music</button>
+<button onclick="showVideo()">🎬 Video</button>
+<button onclick="nextStory()">💌 Next</button>
+<button onclick="celebrate()">🎊 Surprise</button>
+<button onclick="openProposal()">🌹 Proposal</button>
+</div>
+
+<div id="proposal">
+<h2>Will you be mine forever? 💍</h2>
+<button onclick="yes()">YES ❤️</button>
+<button onclick="no()">NO 😢</button>
+</div>
+
+</div>
+
+<!-- MUSIC -->
+<audio id="music" loop>
+<source src="C:\Users\savan\Downloads\Oh Sita Hey Rama.mp3">
+</audio>
+
+<!-- VIDEO -->
+<div class="video-box" id="videoBox">
+<video width="300" controls>
+<source src="C:\Users\savan\Videos\happy.mp4">
+</video><br>
+<button onclick="closeVideo()">Close</button>
+<audio autoplay loop>
+    <source src="C:\Users\savan\Downloads\Oh Sita Hey Rama.mp3" type="audio/mpeg">
+</audio>
+</div>
+
+<script>
+
+// gift open
+function openGift(){
+    document.getElementById("gift").innerHTML="🎉";
+    document.getElementById("controls").style.display="block";
+    nextStory();
+    confetti({particleCount:200,spread:120});
+}
+
+// story messages
+let messages=[
+"Happy Birthday my maradhal pilla 🎂❤️",
+"You are the most special person in my life 💕",
+"You make my world beautiful 🌍",
+"I will love you forever 💖"
+];
+
+let index=0;
+function typeText(msg){
+    let i=0;
+    document.getElementById("text").innerHTML="";
+    function typing(){
+        if(i<msg.length){
+            document.getElementById("text").innerHTML+=msg.charAt(i);
+            i++;
+            setTimeout(typing,40);
+        }
+    }
+    typing();
+}
+
+function nextStory(){
+    typeText(messages[index]);
+    index=(index+1)%messages.length;
+}
+
+// music
+function playMusic(){
+    document.getElementById("music").play();
+}
+
+// video
+function showVideo(){
+    document.getElementById("videoBox").style.display="block";
+}
+function closeVideo(){
+    document.getElementById("videoBox").style.display="none";
+}
+
+// hearts
+setInterval(()=>{
+    let h=document.createElement("div");
+    h.className="heart";
+    h.innerHTML="💖";
+    h.style.left=Math.random()*100+"vw";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),5000);
+},300);
+
+// confetti
+function celebrate(){
+    confetti({particleCount:300,spread:150});
+}
+
+// proposal
+function openProposal(){
+    document.getElementById("proposal").style.display="block";
+}
+function yes(){
+    document.getElementById("text").innerHTML="Yay 💖 I love you Sowmya forever!";
+    confetti({particleCount:400,spread:180});
+}
+function no(){
+    document.getElementById("text").innerHTML="No? 😢 Still I love you forever 💔";
+}
+
+</script>
+
+</body>
+</html>
